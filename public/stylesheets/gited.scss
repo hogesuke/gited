@@ -1,0 +1,11 @@
+body {
+    overflow: hidden;
+}
+
+#screen {
+    height: 100%;
+    position: relative;
+    .commit {
+        position: absolute;
+    }
+}
