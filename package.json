@@ -9,7 +9,10 @@
     "express": "3.4.7",
     "ejs": "*",
     "passport": "~0.2.0",
-    "passport-github": "~0.1.5"
+    "passport-github": "~0.1.5",
+    "node-github": "0.0.3",
+    "request": "~2.34.0",
+    "async": "~0.8.0"
   },
   "engines": {
     "ejs": "*"

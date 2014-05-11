@@ -1,14 +1,16 @@
 /* line 1, gited.scss */
 body {
   overflow: hidden;
+  background-color: #000000;
 }
 
-/* line 5, gited.scss */
+/* line 6, gited.scss */
 #screen {
   height: 100%;
   position: relative;
+  color: #FFFFFF;
 }
-/* line 8, gited.scss */
+/* line 10, gited.scss */
 #screen .commit {
   position: absolute;
 }

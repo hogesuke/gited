@@ -10,7 +10,8 @@ $(function() {
         type: 'GET',
         url: '/commits',
         success: function(res) {
-          that.commits = res.commits;
+          console.dir(res[0]);
+          that.commits = res[0];
         },
         error: function() {
         }
@@ -36,7 +37,7 @@ $(function() {
 
       function doScroll(commit) {
         return function() {
-          var $commit = $('<div class="commit">' + commit.comment + '</div>');
+          var $commit = $('<div class="commit">' + commit.message + '</div>');
           var movement = -50;
           var d = new $.Deferred;
 

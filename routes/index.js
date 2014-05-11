@@ -1,5 +1,9 @@
 "use strict";
 
+var async = require('async');
+var GitHubApi = require('node-github');
+var request = require('request');
+
 exports.index = function(req, res){
   res.render('index', { title: 'Express' });
 };
@@ -9,48 +13,54 @@ exports.login = function(req, res){
 
 exports.commits = function(req, res){
 
-  res.send({
-    commits:[
-      {
-        author: "hogesuke",
-        comment: "コミットコメント１"
-      },
-      {
-        author: "hogesuke",
-        comment: "コミットコメント２"
-      },
-      {
-        author: "hogesuke",
-        comment: "コミットコメント３"
-      },
-      {
-        author: "hogesuke",
-        comment: "コミットコメント4"
-      },
-      {
-        author: "hogesuke",
-        comment: "コミットコメント5"
-      },
-      {
-        author: "hogesuke",
-        comment: "コミットコメント6"
-      },
-      {
-        author: "hogesuke",
-        comment: "コミットコメント7"
-      },
-      {
-        author: "hogesuke",
-        comment: "コミットコメント8"
-      },
-      {
-        author: "hogesuke",
-        comment: "コミットコメント9"
-      },
-      {
-        author: "hogesuke",
-        comment: "コミットコメント10"
-      }
-    ]
+  var loginUser = req.session.passport.user;
+  var perPage = 100;
+  var github = new GitHubApi({
+    version: '3.0.0',
+    timeout: 5000
+  });
+  var getCommitsRequester = function(pageNo, commits) {
+
+    var func = function(next) {
+      github.repos.getCommits({
+        user: 'hogesuke',
+        repo: 'picob',
+        per_page: perPage,
+        page: pageNo
+      }, function(err, result) {
+        if (err) {
+          console.dir(err);
+          next(err);
+        }
+
+        console.log('result.length: ' + result.length);
+        console.log('commits.length: ' + commits.length);
+        for (var i = 0; i < result.length; i++) {
+          commits.push(result[i].commit);
+        }
+
+        // すべてのCommitを取得し終えた場合はオブジェクトを返却。
+        // まだ続きがある場合は、再帰で取得を継続する。
+        if (result.length === perPage) {
+          pageNo++;
+          return func(next);
+        }
+        next(null, commits);
+      });
+    }
+    return func;
+  };
+
+  github.authenticate({
+    type: 'oauth',
+    token: loginUser.token
+  });
+
+  async.series([getCommitsRequester(0, [])], function(err, commits) {
+    if (!commits) {
+      res.send('error occurred.');
+      return;
+    }
+    res.send(commits);
   });
 };
