@@ -2,24 +2,29 @@
 body {
   overflow: hidden;
   background-color: #000000;
-}
-
-/* line 6, gited.scss */
-#repositories {
   color: #FFFFFF;
 }
+
 /* line 8, gited.scss */
+#user-info #user-type {
+  font-size: 14px;
+}
+/* line 11, gited.scss */
+#user-info #user-name {
+  font-size: 16px;
+}
+
+/* line 17, gited.scss */
 #repositories a {
   color: #FFFFFF;
 }
 
-/* line 13, gited.scss */
+/* line 22, gited.scss */
 #screen {
   height: 100%;
   position: relative;
-  color: #FFFFFF;
 }
-/* line 17, gited.scss */
+/* line 25, gited.scss */
 #screen .commit {
   position: absolute;
   overflow: hidden;

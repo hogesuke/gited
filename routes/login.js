@@ -19,11 +19,9 @@ passport.use(githubStrategy);
  */
 function login(token, tokenSecret, profile, done) {
   var user = {
-    id: profile.id,
     raw_name: profile.username,
-    name: profile.displayName,
-    provider: profile.provider,
-    token: token
+    token: token,
+    type: 'loginUser'
   }
   console.dir(user);
   done(null, user);
@@ -44,7 +42,13 @@ exports.checkLogin = function(req, res, next) {
   if (req.session.passport.user) {
     next();
   } else {
-    res.send('not yet login.');
+    var user = {
+      raw_name: LoginConfigration.tryUser.raw_name,
+      token: LoginConfigration.tryUser.token,
+      type: 'tryUser'
+    };
+    req.session.passport.user = user;
+    next();
   }
 };
 
@@ -53,7 +57,7 @@ exports.checkLogin = function(req, res, next) {
  */
 exports.logout = function(req, res) {
     req.logout();
-    res.send('logout completed.');
+    res.redirect('/');
 };
 
 /**

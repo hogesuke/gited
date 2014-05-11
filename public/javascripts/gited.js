@@ -14,7 +14,6 @@ $(function() {
         type: 'GET',
         url: '/repos',
         success: function(res) {
-          console.dir(res[0]);
           that.repos = res[0];
         },
         error: function() {
@@ -28,7 +27,6 @@ $(function() {
         url: '/commits',
         data: {name: repositoryName},
         success: function(res) {
-          console.dir(res[0]);
           that.commits = res[0];
         },
         error: function() {
@@ -88,7 +86,7 @@ $(function() {
 
   loader.loadRepos().then(function() {
     var repos = loader.getRepos();
-    var $repositories = $('#repositories');
+    var $repositories = $('#repositories ul');
     $.each(repos, function(i, repository) {
       var $repository = $('<li class="repo"><a href="javascript:void(0)">' + repository.name + '</a></li>');
       $repositories.append($repository);

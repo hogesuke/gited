@@ -1,10 +1,19 @@
 body {
     overflow: hidden;
     background-color: #000000;
+    color: #FFFFFF;
+}
+
+#user-info {
+    #user-type {
+        font-size: 14px;
+    }
+    #user-name {
+        font-size: 16px;
+    }
 }
 
 #repositories {
-    color: #FFFFFF;
     a {
         color: #FFFFFF;
     }
@@ -13,7 +22,6 @@ body {
 #screen {
     height: 100%;
     position: relative;
-    color: #FFFFFF;
     .commit {
         position: absolute;
         overflow: hidden;

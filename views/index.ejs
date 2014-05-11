@@ -6,9 +6,21 @@
 <title>gited</title>
 </head>
 <body>
-<form action="/login/github" method="post">
-  <input type="submit" id="login-button" value="LOGIN"/>
-</form>
+<% if (userType === 'tryUser') { %>
+  <form action="/login/github" method="post">
+    <input type="submit" id="login-button" value="LOGIN"/>
+  </form>
+<% } else { %>
+  <form action="/logout" method="post">
+    <input type="submit" id="logout-button" value="LOGOUT"/>
+  </form>
+<% } %>
+<div id="user-info">
+  <% if (userType === 'tryUser') { %>
+  <div id="user-type">現在はお試し用ユーザーのリポジトリを表示しています。<br>ログインすれば自分のリポジトリで動かすことができます。</div>
+  <% } %>
+  <div id="user-name"><%= name %></div>
+</div>
 <div id="repositories">
   <ul>
   </ul>

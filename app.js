@@ -30,9 +30,9 @@ if ('development' == app.get('env')) {
   app.use(express.errorHandler());
 }
 
-app.get('/', routes.index);
-app.get('/commits', routes.commits);
-app.get('/repos', routes.repos);
+app.get('/', login.checkLogin, routes.index);
+app.get('/commits', login.checkLogin, routes.commits);
+app.get('/repos', login.checkLogin, routes.repos);
 app.post('/login/github', passport.authenticate('github'));
 app.get('/login/github/callback',
   passport.authenticate('github',{failureRedirect: '/fail'}),
@@ -41,6 +41,7 @@ app.get('/login/github/callback',
     res.redirect('/');
   }
 );
+app.post('/logout', login.logout);
 
 http.createServer(app).listen(app.get('port'), function(){
   console.log('Express server listening on port ' + app.get('port'));

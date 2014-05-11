@@ -5,7 +5,11 @@ var GitHubApi = require('node-github');
 var request = require('request');
 
 exports.index = function(req, res){
-  res.render('index', { title: 'Express' });
+  var loginUser = req.session.passport.user;
+  res.render('index', {
+    name: loginUser.raw_name,
+    userType: loginUser.type
+  });
 };
 
 exports.repos = function(req, res){
