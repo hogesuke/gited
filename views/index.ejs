@@ -3,6 +3,8 @@
 <link rel='stylesheet' href='/stylesheets/gited.css' />
 <script type="text/javascript" src="/javascripts/jquery.min.js"></script>
 <script type="text/javascript" src="/javascripts/gited.js"></script>
+<script type="text/javascript" src="http://www.google.com/jsapi"></script>
+<script type="text/javascript">google.load( 'swfobject', '2.2' );</script>
 <title>gited</title>
 </head>
 <body>
@@ -15,6 +17,7 @@
     <input type="submit" id="logout-button" value="LOGOUT"/>
   </form>
 <% } %>
+<div id="music-player"></div>
 <div id="user-info">
   <% if (userType === 'tryUser') { %>
   <div id="user-type">現在はお試し用ユーザーのリポジトリを表示しています。<br>ログインすれば自分のリポジトリで動かすことができます。</div>

@@ -5,26 +5,31 @@ body {
   color: #FFFFFF;
 }
 
-/* line 8, gited.scss */
+/* line 7, gited.scss */
+#player {
+  float: right;
+}
+
+/* line 12, gited.scss */
 #user-info #user-type {
   font-size: 14px;
 }
-/* line 11, gited.scss */
+/* line 15, gited.scss */
 #user-info #user-name {
   font-size: 16px;
 }
 
-/* line 17, gited.scss */
+/* line 21, gited.scss */
 #repositories a {
   color: #FFFFFF;
 }
 
-/* line 22, gited.scss */
+/* line 26, gited.scss */
 #screen {
   height: 100%;
   position: relative;
 }
-/* line 25, gited.scss */
+/* line 29, gited.scss */
 #screen .commit {
   position: absolute;
   overflow: hidden;

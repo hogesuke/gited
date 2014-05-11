@@ -88,7 +88,11 @@ exports.commits = function(req, res){
         }
 
         for (var i = 0; i < result.length; i++) {
-          commits.push(result[i].commit);
+          var commit = result[i].commit;
+          var committer = result[i].committer;
+          commit.committer.id = committer.id;
+          commit.committer.raw_name = committer.login;
+          commits.push(commit);
         }
 
         // すべてのCommitを取得し終えた場合はオブジェクトを返却。

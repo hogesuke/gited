@@ -27,6 +27,7 @@ $(function() {
         url: '/commits',
         data: {name: repositoryName},
         success: function(res) {
+          console.dir(res);
           that.commits = res[0];
         },
         error: function() {
@@ -36,22 +37,49 @@ $(function() {
   };
   var scroller = {
     windowHeight: undefined,
+    repoName: undefined,
     commits: undefined,
-    init: function() {
+    commitCount: undefined,
+    developer: undefined,
+    setRepoName: function(name) {
+      this.repoName = name;
     },
     setCommits: function(commits) {
       this.commits = commits;
+    },
+    analyze: function() {
+      var commiterCounter = {}
+      $.each(this.commits, function(i, commit) {
+        var committer = commit.committer;
+        if (commiterCounter[committer.raw_name] === undefined) {
+          commiterCounter[committer.raw_name] = 1;
+        } else {
+          commiterCounter[committer.raw_name]++;
+        }
+      });
+      this.developer = commiterCounter;
+      this.commitCount = this.commits.length;
+    },
+    playMusic: function() {
+      var params = { allowScriptAccess: "always" };
+      var atts = { id: "player" };
+      swfobject.embedSWF("http://www.youtube.com/v/wNtX8HhsJ0E?enablejsapi=1&playerapiid=player",
+          "music-player", "250", "75", "8", null, null, params, atts);
+
     },
     scroll: function() {
       var $screen = $('#screen');
       var commitsLength = this.commits.length;
 
+      this.playMusic();
+
       var prev = (function() {var d = new $.Deferred; d.resolve(); return d.promise();})();
       for (var i = 0; i < commitsLength; i++) {
-        prev = prev.then(doScroll(this.commits[i]));
+        prev = prev.then(doScrollCommitLog(this.commits[i]));
       }
+      prev.then();
 
-      function doScroll(commit) {
+      function doScrollCommitLog(commit) {
         return function() {
           var $commit = $('<div class="commit">' + commit.message + '</div>');
           var movement = -50;
@@ -81,6 +109,38 @@ $(function() {
           return d.promise();
         };
       }
+
+      // TODO 実装途中
+      //function doScrollDeveloper(dev) {
+      //  return function() {
+      //    var $commit = $('<div class="developer">' + dev. + '</div>');
+      //    var movement = -50;
+      //    var d = new $.Deferred;
+
+      //    $commit.css({bottom: movement + 'px'});
+      //    var initIntervalId = setInterval(function() {
+      //      var $last = $('.commit:last');
+      //      var bottom = $last.length !== 0 ? $last.css('bottom').replace('px', '') : undefined;
+      //      if ($last && bottom < 0) {
+      //        return;
+      //      } else {
+      //        $screen.append($commit);
+      //        clearInterval(initIntervalId);
+      //        d.resolve();
+      //      }
+      //      var scrollIntervalId = setInterval(function() {
+      //        movement += 2;
+      //        $commit.css({bottom: movement + 'px'});
+      //        if ($commit.offset().top < -30) {
+      //          $commit.remove();
+      //          clearInterval(scrollIntervalId);
+      //        }
+      //      }, 40);
+      //    }, 100);
+
+      //    return d.promise();
+      //  }
+      //}
     }
   };
 
@@ -94,9 +154,19 @@ $(function() {
   });
 
   $('#repositories').on('click', '.repo a', function() {
-    loader.loadCommits($(this).text()).then(function() {
+    var repoName = $(this).text();
+    loader.loadCommits(repoName).then(function() {
+      scroller.setRepoName(repoName);
       scroller.setCommits(loader.getCommits());
+      scroller.analyze();
       scroller.scroll();
     });
   });
+
 });
+
+// YouTubeプレイヤー自動再生用
+function onYouTubePlayerReady(playerId) {
+  var player = document.getElementById("player");
+  player.playVideo();
+}
