@@ -93,7 +93,7 @@ exports.commits = function(req, res){
           pageNo++;
           return func(next);
         }
-        next(null, commits);
+        next(null, commits.reverse());
       });
     }
     return func;
