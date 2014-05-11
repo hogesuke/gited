@@ -8,23 +8,20 @@ exports.index = function(req, res){
   res.render('index', { title: 'Express' });
 };
 
-exports.login = function(req, res){
-}
-
-exports.commits = function(req, res){
-
+exports.repos = function(req, res){
   var loginUser = req.session.passport.user;
   var perPage = 100;
   var github = new GitHubApi({
     version: '3.0.0',
     timeout: 5000
   });
-  var getCommitsRequester = function(pageNo, commits) {
 
+  var getReposRequester = function(pageNo, repos) {
     var func = function(next) {
-      github.repos.getCommits({
-        user: 'hogesuke',
-        repo: 'picob',
+      github.repos.getAll({
+        type: 'all',
+        sort: 'updated',
+        direction: 'desc',
         per_page: perPage,
         page: pageNo
       }, function(err, result) {
@@ -33,8 +30,59 @@ exports.commits = function(req, res){
           next(err);
         }
 
-        console.log('result.length: ' + result.length);
-        console.log('commits.length: ' + commits.length);
+        for (var i = 0; i < result.length; i++) {
+          repos.push(result[i]);
+        }
+
+        // すべてのRepositoryを取得し終えた場合はオブジェクトを返却。
+        // まだ続きがある場合は、再帰で取得を継続する。
+        if (result.length === perPage) {
+          pageNo++;
+          return func(next);
+        }
+        next(null, repos);
+      });
+    }
+    return func;
+  };
+
+  github.authenticate({
+    type: 'oauth',
+    token: loginUser.token
+  });
+
+  async.series([getReposRequester(0, [])], function(err, repos) {
+    if (!repos) {
+      res.send('error occurred.');
+      return;
+    }
+    res.send(repos);
+  });
+}
+
+exports.commits = function(req, res){
+
+  var loginUser = req.session.passport.user;
+  var repositoryName = req.query.name;
+  var perPage = 100;
+  var github = new GitHubApi({
+    version: '3.0.0',
+    timeout: 5000
+  });
+
+  var getCommitsRequester = function(pageNo, commits) {
+    var func = function(next) {
+      github.repos.getCommits({
+        user: loginUser.raw_name,
+        repo: repositoryName,
+        per_page: perPage,
+        page: pageNo
+      }, function(err, result) {
+        if (err) {
+          console.dir(err);
+          next(err);
+        }
+
         for (var i = 0; i < result.length; i++) {
           commits.push(result[i].commit);
         }

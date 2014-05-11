@@ -32,6 +32,7 @@ if ('development' == app.get('env')) {
 
 app.get('/', routes.index);
 app.get('/commits', routes.commits);
+app.get('/repos', routes.repos);
 app.post('/login/github', passport.authenticate('github'));
 app.get('/login/github/callback',
   passport.authenticate('github',{failureRedirect: '/fail'}),

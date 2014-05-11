@@ -3,11 +3,23 @@ body {
     background-color: #000000;
 }
 
+#repositories {
+    color: #FFFFFF;
+    a {
+        color: #FFFFFF;
+    }
+}
+
 #screen {
     height: 100%;
     position: relative;
     color: #FFFFFF;
     .commit {
         position: absolute;
+        overflow: hidden;
+        width: 100%;
+        padding: 5px 0px;
+        text-align: center;
+        font-size: 18px;
     }
 }

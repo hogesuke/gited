@@ -5,12 +5,26 @@ body {
 }
 
 /* line 6, gited.scss */
+#repositories {
+  color: #FFFFFF;
+}
+/* line 8, gited.scss */
+#repositories a {
+  color: #FFFFFF;
+}
+
+/* line 13, gited.scss */
 #screen {
   height: 100%;
   position: relative;
   color: #FFFFFF;
 }
-/* line 10, gited.scss */
+/* line 17, gited.scss */
 #screen .commit {
   position: absolute;
+  overflow: hidden;
+  width: 100%;
+  padding: 5px 0px;
+  text-align: center;
+  font-size: 18px;
 }

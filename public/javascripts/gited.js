@@ -1,14 +1,32 @@
 $(function() {
   var loader = {
+    repos: undefined,
     commits: undefined,
+    getRepos: function() {
+      return this.repos;
+    },
     getCommits: function() {
       return this.commits;
     },
-    load: function() {
+    loadRepos: function() {
+      var that = this;
+      return $.ajax({
+        type: 'GET',
+        url: '/repos',
+        success: function(res) {
+          console.dir(res[0]);
+          that.repos = res[0];
+        },
+        error: function() {
+        }
+      });
+    },
+    loadCommits: function(repositoryName) {
       var that = this;
       return $.ajax({
         type: 'GET',
         url: '/commits',
+        data: {name: repositoryName},
         success: function(res) {
           console.dir(res[0]);
           that.commits = res[0];
@@ -68,8 +86,19 @@ $(function() {
     }
   };
 
-  loader.load().then(function() {
-    scroller.setCommits(loader.getCommits());
-    scroller.scroll();
+  loader.loadRepos().then(function() {
+    var repos = loader.getRepos();
+    var $repositories = $('#repositories');
+    $.each(repos, function(i, repository) {
+      var $repository = $('<li class="repo"><a href="javascript:void(0)">' + repository.name + '</a></li>');
+      $repositories.append($repository);
+    })
+  });
+
+  $('#repositories').on('click', '.repo a', function() {
+    loader.loadCommits($(this).text()).then(function() {
+      scroller.setCommits(loader.getCommits());
+      scroller.scroll();
+    });
   });
 });
