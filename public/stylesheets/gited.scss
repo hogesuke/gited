@@ -1,3 +1,9 @@
+@mixin border-radius($settings...) {
+    -webkit-border-radius: $settings;
+    -moz-border-radius: $settings;
+    border-radius: $settings;
+}
+
 body {
     overflow: hidden;
     background-color: #000000;
@@ -5,7 +11,24 @@ body {
 }
 
 #player {
-    float: right;
+    position: fixed;
+    top: 0;
+    right: 0;
+}
+
+#description {
+    text-align: center;
+    #main-title {
+        margin: 10px 0;
+        font-size: 70px;
+    }
+    #catch-copy {
+        font-size: 25px;
+        margin-bottom: 30px;
+    }
+    #guide {
+        font-size: 16px;
+    }
 }
 
 #user-info {
@@ -25,6 +48,7 @@ body {
 
 #screen {
     height: 100%;
+    width: 100%;
     position: relative;
     .commit {
         position: absolute;
@@ -33,5 +57,20 @@ body {
         padding: 5px 0px;
         text-align: center;
         font-size: 18px;
+    }
+}
+
+#stop-button {
+    position: fixed;
+    right: 10px;
+    bottom: 10px;
+    padding: 8px 15px;
+    border: 2px solid #FFFFFF;
+    @include border-radius(5px);
+    text-align: right;
+    font-size: 20px;
+    color: #FFFFFF;
+    &.inactive {
+        display: none;
     }
 }
