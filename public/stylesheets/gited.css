@@ -74,8 +74,9 @@ body {
   text-align: right;
   font-size: 20px;
   color: #FFFFFF;
+  cursor: pointer;
 }
-/* line 73, gited.scss */
+/* line 74, gited.scss */
 #stop-button.inactive {
   display: none;
 }
