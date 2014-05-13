@@ -177,6 +177,22 @@ $(function() {
     scroller.stop();
   });
 
+  $("#social-button-container .twitter").socialbutton("twitter", {
+      button : "horizontal",
+      text : "GitHubのコミットログでエンディングロール「Git Ending」",
+      url : "http://gited.net",
+  }).width(95);
+
+  $("#social-button-container .facebook").socialbutton("facebook_like", {
+      button : "button_count",
+      url : "http://gited.net",
+  }).width(110);
+
+  $("#social-button-container .hatena").socialbutton("hatena", {
+      button : "standard",
+      url : "http://gited.net",
+      title : "picob",
+  }).width(70);
 });
 
 // YouTubeプレイヤー自動再生用

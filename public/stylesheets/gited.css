@@ -6,52 +6,61 @@ body {
 }
 
 /* line 13, gited.scss */
+#social-button-container {
+  overflow: hidden;
+}
+/* line 15, gited.scss */
+#social-button-container div {
+  float: left;
+}
+
+/* line 20, gited.scss */
 #player {
   position: fixed;
   top: 0;
   right: 0;
 }
 
-/* line 19, gited.scss */
+/* line 26, gited.scss */
 #description {
   text-align: center;
 }
-/* line 21, gited.scss */
+/* line 28, gited.scss */
 #description #main-title {
   margin: 10px 0;
   font-size: 70px;
 }
-/* line 25, gited.scss */
+/* line 32, gited.scss */
 #description #catch-copy {
   font-size: 25px;
   margin-bottom: 30px;
 }
-/* line 29, gited.scss */
+/* line 36, gited.scss */
 #description #guide {
   font-size: 16px;
 }
 
-/* line 35, gited.scss */
+/* line 42, gited.scss */
 #user-info #user-type {
   font-size: 14px;
 }
-/* line 38, gited.scss */
+/* line 45, gited.scss */
 #user-info #user-name {
   font-size: 16px;
 }
 
-/* line 44, gited.scss */
+/* line 51, gited.scss */
 #repositories a {
   color: #FFFFFF;
 }
 
-/* line 49, gited.scss */
+/* line 56, gited.scss */
 #screen {
   height: 100%;
   width: 100%;
   position: relative;
 }
-/* line 53, gited.scss */
+/* line 60, gited.scss */
 #screen .commit {
   position: absolute;
   overflow: hidden;
@@ -61,7 +70,7 @@ body {
   font-size: 18px;
 }
 
-/* line 63, gited.scss */
+/* line 70, gited.scss */
 #stop-button {
   position: fixed;
   right: 10px;
@@ -76,7 +85,7 @@ body {
   color: #FFFFFF;
   cursor: pointer;
 }
-/* line 74, gited.scss */
+/* line 81, gited.scss */
 #stop-button.inactive {
   display: none;
 }

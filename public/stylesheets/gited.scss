@@ -10,6 +10,13 @@ body {
     color: #FFFFFF;
 }
 
+#social-button-container {
+    overflow: hidden;
+    div {
+        float: left;
+    }
+}
+
 #player {
     position: fixed;
     top: 0;
