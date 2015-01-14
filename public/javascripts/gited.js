@@ -61,7 +61,7 @@ $(function() {
       this.commitCount = this.commits.length;
     },
     playMusic: function() {
-      var songs = ['wNtX8HhsJ0E', 'nEbFnkzF1gU', 'iVu8PQ1eFWk'];
+      var songs = ['5UOeWwU33Kc', 'nEbFnkzF1gU', 'iVu8PQ1eFWk'];
       var randomIndex = Math.floor(Math.random() * songs.length);
       var params = { allowScriptAccess: "always" };
       var atts = { id: "player" };
