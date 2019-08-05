@@ -2,7 +2,7 @@
 
 var passport = require('passport');
 var GithubStrategy = require('passport-github').Strategy;
-var LoginConfigration = require('../config/login-configration');
+var LoginConfigration = require('../config/login-configuration');
 
 /**
  * Github OAuth.
@@ -30,7 +30,7 @@ function login(token, tokenSecret, profile, done) {
 passport.serializeUser(function(user, done){
   done(null, user);
 });
- 
+
 passport.deserializeUser(function(user, done){
   done(null, user);
 });
