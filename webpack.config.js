@@ -1,5 +1,6 @@
 const path = require('path')
 const webpack = require('webpack')
+const MiniCssExtractPlugin = require('mini-css-extract-plugin')
 
 // const HtmlWebpackPlugin = require('html-webpack-plugin')
 
@@ -14,7 +15,18 @@ module.exports = {
     path: path.resolve(__dirname, 'www/js/')
   },
 
-  plugins: [new webpack.ProgressPlugin()],
+  resolve: {
+    alias: {
+      '@': path.resolve(__dirname, 'src')
+    }
+  },
+
+  plugins: [
+    new webpack.ProgressPlugin(),
+    new MiniCssExtractPlugin({
+      filename: '../style/gited.css'
+    })
+  ],
 
   module: {
     rules: [
@@ -22,6 +34,22 @@ module.exports = {
         test: /.(js|jsx)$/,
         include: [path.resolve(__dirname, 'src/js')],
         loader: 'babel-loader'
+      },
+      {
+        test: /\.scss$/,
+        exclude: /(node_modules|bower_components)/,
+        use: [{
+          loader: MiniCssExtractPlugin.loader
+        },
+        {
+          loader: 'css-loader'
+        },
+        {
+          loader: 'sass-loader',
+          options: {
+            sourceMap: true
+          }
+        }]
       }
     ]
   },

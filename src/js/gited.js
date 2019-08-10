@@ -1,3 +1,5 @@
+import '@/style/gited.scss'
+
 $(function () {
   var loader = {
     repos: undefined,
