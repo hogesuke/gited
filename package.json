@@ -6,7 +6,7 @@
     "start": "node app.js",
     "build": "webpack",
     "watch": "webpack --watch",
-    "eslint": "eslint ./src/js/gited.js"
+    "eslint": "eslint ./src/js"
   },
   "browserslist": [
     "> 0.5% in JP",
