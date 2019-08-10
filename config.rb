@@ -1,5 +1,0 @@
-http_path = "/"
-css_dir = "/www/style/"
-sass_dir = "/src/style/"
-images_dir = "/"
-javascripts_dir = "/"
