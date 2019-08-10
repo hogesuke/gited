@@ -1,4 +1,4 @@
-'use strict';
+'use strict'
 
 var passport = require('passport')
 var GithubStrategy = require('passport-github').Strategy
@@ -57,8 +57,8 @@ exports.checkLogin = function (req, res, next) {
  */
 exports.logout = function (req, res) {
   req.logout()
-    res.redirect('/')
-};
+  res.redirect('/')
+}
 
 /**
  * Strategys.

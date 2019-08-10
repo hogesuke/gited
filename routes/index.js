@@ -1,4 +1,4 @@
-'use strict';
+'use strict'
 
 var async = require('async')
 var GitHubApi = require('node-github')
@@ -10,7 +10,7 @@ exports.index = function (req, res) {
     name: loginUser.raw_name,
     userType: loginUser.type
   })
-};
+}
 
 exports.repos = function (req, res) {
   var loginUser = req.session.passport.user
@@ -48,7 +48,7 @@ exports.repos = function (req, res) {
       })
     }
     return func
-  };
+  }
 
   github.authenticate({
     type: 'oauth',
@@ -58,7 +58,7 @@ exports.repos = function (req, res) {
   async.series([getReposRequester(0, [])], function (err, repos) {
     if (!repos) {
       res.send('error occurred.')
-      return;
+      return
     }
     res.send(repos)
   })
@@ -104,7 +104,7 @@ exports.commits = function (req, res) {
       })
     }
     return func
-  };
+  }
 
   github.authenticate({
     type: 'oauth',
@@ -114,8 +114,8 @@ exports.commits = function (req, res) {
   async.series([getCommitsRequester(0, [])], function (err, commits) {
     if (!commits) {
       res.send('error occurred.')
-      return;
+      return
     }
     res.send(commits)
   })
-};
+}

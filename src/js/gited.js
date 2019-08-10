@@ -83,7 +83,6 @@ $(function () {
         prev = prev.then(doScrollCommitLog(this.commits[i], this.intervalIds))
       }
       prev.then(function () {
-        var $lastCommit = $('.commit:last')
         var endJudgeIntervalId = setInterval(function () {
           if (!$('.commit:last').length) {
             $('#user-info').fadeIn(1500)
@@ -92,7 +91,8 @@ $(function () {
             $('#description').fadeIn(1500)
             $stopButton.addClass('inactive')
             clearInterval(endJudgeIntervalId)
-            stopPlayer()
+            // TODO: YouTubeプレイヤーを復活させる場合は、もとに戻す
+            // stopPlayer()
           }
         }, 500)
       })
@@ -143,11 +143,12 @@ $(function () {
         $('#login-form').fadeIn(1500)
         $('#description').fadeIn(1500)
       })
-      stopPlayer()
-      repoName = undefined
-      commits = undefined
-      commitCount = undefined
-      developer = undefined
+      // TODO: YouTubeプレイヤーを復活させる場合は、もとに戻す
+      // stopPlayer()
+      this.repoName = undefined
+      this.commits = undefined
+      this.commitCount = undefined
+      this.developer = undefined
     }
   }
 
