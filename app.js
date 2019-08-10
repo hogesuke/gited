@@ -1,48 +1,48 @@
-"use strict";
+'use strict'
 
-var express = require('express');
-var http = require('http');
-var path = require('path');
-var passport = require('passport');
-var routes = require('./routes');
-var login = require('./routes/login');
+var express = require('express')
+var http = require('http')
+var path = require('path')
+var passport = require('passport')
+var routes = require('./routes')
+var login = require('./routes/login')
 
-var app = express();
+var app = express()
 
 // all environments
-app.set('port', process.env.PORT || 3001);
-app.set('views', path.join(__dirname, 'views'));
-app.set('view engine', 'ejs');
-app.use(express.favicon());
-app.use(express.logger('dev'));
-app.use(express.json());
-app.use(express.urlencoded());
-app.use(express.methodOverride());
-app.use(express.cookieParser());
-app.use(express.session({secret: 'testtesttest'}));
-app.use(passport.initialize());
-app.use(passport.session());
-app.use(app.router);
-app.use(express.static(path.join(__dirname, 'public')));
+app.set('port', process.env.PORT || 3001)
+app.set('views', path.join(__dirname, 'views'))
+app.set('view engine', 'ejs')
+app.use(express.favicon())
+app.use(express.logger('dev'))
+app.use(express.json())
+app.use(express.urlencoded())
+app.use(express.methodOverride())
+app.use(express.cookieParser())
+app.use(express.session({ secret: 'testtesttest' }))
+app.use(passport.initialize())
+app.use(passport.session())
+app.use(app.router)
+app.use(express.static(path.join(__dirname, 'www')))
 
 // development only
-if ('development' == app.get('env')) {
-  app.use(express.errorHandler());
+if (app.get('env') == 'development') {
+  app.use(express.errorHandler())
 }
 
-app.get('/', login.checkLogin, routes.index);
-app.get('/commits', login.checkLogin, routes.commits);
-app.get('/repos', login.checkLogin, routes.repos);
-app.post('/login/github', passport.authenticate('github'));
+app.get('/', login.checkLogin, routes.index)
+app.get('/commits', login.checkLogin, routes.commits)
+app.get('/repos', login.checkLogin, routes.repos)
+app.post('/login/github', passport.authenticate('github'))
 app.get('/login/github/callback',
-  passport.authenticate('github',{failureRedirect: '/fail'}),
-  function(req, res) {
-    var loginUser = req.session.passport.user;
-    res.redirect('/');
+  passport.authenticate('github', { failureRedirect: '/fail' }),
+  function (req, res) {
+    var loginUser = req.session.passport.user
+    res.redirect('/')
   }
-);
-app.post('/logout', login.logout);
+)
+app.post('/logout', login.logout)
 
-http.createServer(app).listen(app.get('port'), function(){
-  console.log('Express server listening on port ' + app.get('port'));
-});
+http.createServer(app).listen(app.get('port'), function () {
+  console.log('Express server listening on port ' + app.get('port'))
+})
