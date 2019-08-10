@@ -1,24 +1,26 @@
 const path = require('path')
 const webpack = require('webpack')
 
-const HtmlWebpackPlugin = require('html-webpack-plugin')
+// const HtmlWebpackPlugin = require('html-webpack-plugin')
 
 module.exports = {
   mode: 'development',
-  entry: './public/javascripts/gited.js',
-
-  output: {
-    filename: '[name].[chunkhash].js',
-    path: path.resolve(__dirname, 'dist')
+  entry: {
+    gited: './src/js/gited.js'
   },
 
-  plugins: [new webpack.ProgressPlugin(), new HtmlWebpackPlugin()],
+  output: {
+    filename: '[name].js',
+    path: path.resolve(__dirname, 'www/js/')
+  },
+
+  plugins: [new webpack.ProgressPlugin()],
 
   module: {
     rules: [
       {
         test: /.(js|jsx)$/,
-        include: [path.resolve(__dirname, 'public/javascripts')],
+        include: [path.resolve(__dirname, 'src/js')],
         loader: 'babel-loader'
       }
     ]
