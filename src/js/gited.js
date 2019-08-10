@@ -88,7 +88,7 @@ $(function () {
             $('#user-info').fadeIn(1500)
             $('#repositories').fadeIn(1500)
             $('#login-form').fadeIn(1500)
-            $('#description').fadeIn(1500)
+            $('#description').fadeIn(1500);
             $stopButton.addClass('inactive')
             clearInterval(endJudgeIntervalId)
             // TODO: YouTubeプレイヤーを復活させる場合は、もとに戻す
