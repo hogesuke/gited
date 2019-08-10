@@ -9,12 +9,15 @@ module.exports = {
   globals: {
     Atomics: 'readonly',
     SharedArrayBuffer: 'readonly',
-    $: 'readonly'
+    $: 'readonly',
+    swfobject: 'readonly'
   },
   parserOptions: {
     ecmaVersion: 2018,
     sourceType: 'module'
   },
   rules: {
+    'no-unused-vars': 'warn',
+    'comma-dangle': 'off',
   }
 }
