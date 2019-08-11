@@ -6,4 +6,8 @@ notifications:
 cache:
   directories:
     - node_modules
-script: npm run eslint
+env:
+  matrix:
+    - LINT_SCRIPT=eslint
+    - LINT_SCRIPT=stylelint
+script: npm run $LINT_SCRIPT
