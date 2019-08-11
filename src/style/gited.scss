@@ -1,84 +1,93 @@
 @mixin border-radius($settings...) {
-    -webkit-border-radius: $settings;
-    -moz-border-radius: $settings;
-    border-radius: $settings;
+  -webkit-border-radius: $settings;
+  -moz-border-radius: $settings;
+  border-radius: $settings;
 }
 
 body {
-    overflow: hidden;
-    background-color: #000000;
-    color: #FFFFFF;
+  overflow: hidden;
+  background-color: #000;
+  color: #fff;
 }
 
 #social-button-container {
-    overflow: hidden;
-    div {
-        float: left;
-    }
+  overflow: hidden;
+
+  div {
+    float: left;
+  }
 }
 
 #player {
-    position: fixed;
-    top: 0;
-    right: 0;
+  position: fixed;
+  top: 0;
+  right: 0;
 }
 
 #description {
-    text-align: center;
-    #main-title {
-        margin: 10px 0;
-        font-size: 70px;
-    }
-    #catch-copy {
-        font-size: 25px;
-        margin-bottom: 30px;
-    }
-    #guide {
-        font-size: 16px;
-    }
+  text-align: center;
+
+  #main-title {
+    margin: 10px 0;
+    font-size: 70px;
+  }
+
+  #catch-copy {
+    font-size: 25px;
+    margin-bottom: 30px;
+  }
+
+  #guide {
+    font-size: 16px;
+  }
 }
 
 #user-info {
-    #user-type {
-        font-size: 14px;
-    }
-    #user-name {
-        font-size: 16px;
-    }
+  #user-type {
+    font-size: 14px;
+  }
+
+  #user-name {
+    font-size: 16px;
+  }
 }
 
 #repositories {
-    a {
-        color: #FFFFFF;
-    }
+  a {
+    color: #fff;
+  }
 }
 
 #screen {
-    height: 100%;
+  height: 100%;
+  width: 100%;
+  position: relative;
+
+  .commit {
+    position: absolute;
+    overflow: hidden;
     width: 100%;
-    position: relative;
-    .commit {
-        position: absolute;
-        overflow: hidden;
-        width: 100%;
-        padding: 5px 0px;
-        text-align: center;
-        font-size: 18px;
-    }
+    padding: 5px 0;
+    text-align: center;
+    font-size: 18px;
+  }
 }
 
 #stop-button {
-    position: fixed;
-    right: 10px;
-    bottom: 10px;
-    padding: 8px 15px;
-    border: 2px solid #FFFFFF;
-    @include border-radius(5px);
-    text-align: right;
-    font-size: 20px;
-    color: #FFFFFF;
-    cursor: pointer;
-    &.inactive {
-        display: none;
-    }
+  position: fixed;
+  right: 10px;
+  bottom: 10px;
+  padding: 8px 15px;
+  border: 2px solid #fff;
+
+  @include border-radius(5px);
+
+  text-align: right;
+  font-size: 20px;
+  color: #fff;
+  cursor: pointer;
+
+  &.inactive {
+    display: none;
+  }
 }
