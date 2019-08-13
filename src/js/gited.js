@@ -103,15 +103,16 @@ class Scroller {
           clearInterval(initIntervalId)
           d.resolve()
         }
-        const scrollIntervalId = setInterval(() => {
-          intervalIds.push(scrollIntervalId)
-          movement += 2
+        const scroll = () => {
+          movement += 0.8
           $commit.css({ bottom: movement + 'px' })
           if ($commit.offset().top < -30) {
             $commit.remove()
-            clearInterval(scrollIntervalId)
+          } else {
+            requestAnimationFrame(scroll)
           }
-        }, 40)
+        }
+        requestAnimationFrame(scroll)
       }, 100)
 
       return d.promise()
