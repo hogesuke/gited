@@ -1,4 +1,5 @@
 node_modules/
+profile/
 .sass-cache/
 config/login-configuration.js
 
