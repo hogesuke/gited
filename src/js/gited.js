@@ -63,24 +63,69 @@ class Scroller {
 
     $stopButton.removeClass('inactive')
     this.playMusic()
-    let prev = (() => { const d = new $.Deferred(); d.resolve(); return d.promise() })()
-    for (let i = 0; i < commitsLength; i++) {
-      prev = prev.then(this.scrollCommitLog(this.commits[i], this.intervalIds))
-    }
-    prev.then(() => {
-      const endJudgeIntervalId = setInterval(() => {
-        if (!$('.commit:last').length) {
-          $('#user-info').fadeIn(1500)
-          $('#repositories').fadeIn(1500)
-          $('#login-form').fadeIn(1500)
-          $('#description').fadeIn(1500)
-          $stopButton.addClass('inactive')
-          clearInterval(endJudgeIntervalId)
-          // TODO: YouTubeプレイヤーを復活させる場合は、もとに戻す
-          // stopPlayer()
+
+    // let prev = (() => { const d = new $.Deferred(); d.resolve(); return d.promise() })()
+    // for (let i = 0; i < commitsLength; i++) {
+    //   prev = prev.then(this.scrollCommitLog(this.commits[i], this.intervalIds))
+    // }
+    // prev.then(() => {
+    //   const endJudgeIntervalId = setInterval(() => {
+    //     if (!$('.commit:last').length) {
+    //       $('#user-info').fadeIn(1500)
+    //       $('#repositories').fadeIn(1500)
+    //       $('#login-form').fadeIn(1500)
+    //       $('#description').fadeIn(1500)
+    //       $stopButton.addClass('inactive')
+    //       clearInterval(endJudgeIntervalId)
+    //       // TODO: YouTubeプレイヤーを復活させる場合は、もとに戻す
+    //       // stopPlayer()
+    //     }
+    //   }, 500)
+    // })
+
+    const $screen = $('#screen')
+
+    const hoge = async () => {
+      for (const commit of this.commits) {
+        let movement = -50
+        const $commit = $('<div class="commit">' + commit.message + '</div>').css({ bottom: movement + 'px' })
+
+        $screen.append($commit)
+
+        const scroll = () => {
+          movement += 0.8
+          $commit.css({ bottom: movement + 'px' })
+          if ($commit.offset().top < -30) {
+            $commit.remove()
+          } else {
+            requestAnimationFrame(scroll)
+          }
         }
-      }, 500)
-    })
+        requestAnimationFrame(scroll)
+
+        console.log('before await')
+        await new Promise((resolve, reject) => {
+          // setTimeout(() => resolve(), 3000)
+          const init = (entries, object) => {
+            const entry = entries[0]
+            if (entry.isIntersecting) {
+              resolve()
+              object.unobserve(entry.target)
+            }
+          }
+
+          const observer = new IntersectionObserver(init, {
+            rootMargin: '-15px',
+            threshold: [0, 0.5, 1.0]
+          })
+
+          observer.observe($commit[0])
+        })
+        console.log('after await')
+      }
+    }
+
+    hoge()
   }
 
   scrollCommitLog (commit, intervalIds) {
@@ -92,17 +137,27 @@ class Scroller {
       const d = new $.Deferred()
 
       $commit.css({ bottom: movement + 'px' })
-      const initIntervalId = setInterval(() => {
-        intervalIds.push(initIntervalId)
-        const $last = $('.commit:last')
-        const bottom = $last.length !== 0 ? $last.css('bottom').replace('px', '') : undefined
-        if ($last && bottom < 0) {
+
+      const init = (entries, object) => {
+        // const $last = $('.commit:last')
+        const entry = entries[0]
+        // const bottom = $last.length !== 0 ? $last.css('bottom').replace('px', '') : undefined
+        if (!entry.isIntersecting && $('.commit').length > 0) {
+          console.log('coco')
           return
         } else {
+          console.log('gogo')
+
+          if ($('.commit').length > 0) {
+            console.log('unobserve')
+            object.unobserve(entry.target)
+          }
+
           $screen.append($commit)
-          clearInterval(initIntervalId)
+          // clearInterval(initIntervalId)
           d.resolve()
         }
+
         const scroll = () => {
           movement += 0.8
           $commit.css({ bottom: movement + 'px' })
@@ -113,7 +168,14 @@ class Scroller {
           }
         }
         requestAnimationFrame(scroll)
-      }, 100)
+      }
+
+      const observer = new IntersectionObserver(init, {
+        rootMargin: '10px 10px',
+        threshold: [0, 0.5, 1.0]
+      })
+
+      observer.observe($commit[0])
 
       return d.promise()
     }
