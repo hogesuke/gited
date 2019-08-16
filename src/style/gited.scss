@@ -52,12 +52,6 @@ body {
   }
 }
 
-#repositories {
-  a {
-    color: #fff;
-  }
-}
-
 #screen {
   height: 100%;
   width: 100%;
@@ -89,5 +83,25 @@ body {
 
   &.inactive {
     display: none;
+  }
+}
+
+.repo-list {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  list-style: none;
+
+  .repo {
+    width: 350px;
+    height: 140px;
+    margin: 10px;
+    padding: 10px;
+    background: #eee;
+
+    a {
+      color: #333;
+      text-decoration: none;
+    }
   }
 }
