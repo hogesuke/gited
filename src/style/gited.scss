@@ -93,15 +93,38 @@ body {
   list-style: none;
 
   .repo {
+    box-sizing: border-box;
     width: 350px;
     height: 140px;
     margin: 10px;
-    padding: 10px;
-    background: #eee;
+    padding: 15px;
+    background: #fff;
+    border-radius: 6px;
 
-    a {
+    .name {
       color: #333;
       text-decoration: none;
+      font-size: 18px;
+    }
+
+    .description {
+      margin: 4px 0;
+      color: #aaa;
+      font-size: 14px;
+    }
+
+    .owner {
+      .avater {
+        width: 20px;
+        height: 20px;
+      }
+
+      .name {
+        display: inline-block;
+        font-size: 14px;
+        line-height: 20px;
+        color: #aaa;
+      }
     }
   }
 }

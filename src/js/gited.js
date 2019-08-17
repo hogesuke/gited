@@ -147,7 +147,16 @@ $(() => {
   loader.loadRepos().then(repos => {
     const $repositories = $('#repositories ul')
     $.each(repos, (i, repository) => {
-      const $repository = $('<li class="repo"><a href="javascript:void(0)">' + repository.name + '</a></li>')
+      const $repository = $(`
+        <li class="repo">
+          <a class="name" href="javascript:void(0)">${repository.name}</a>
+          <p class="description">${repository.description}</p>
+          <div class="owner">
+            <img class="avater" src="${repository.owner.avatar_url}">
+            <span class="name">${repository.owner.login}</span>
+          </div>
+        </li>
+      `)
       $repositories.append($repository)
     })
   })
