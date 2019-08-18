@@ -151,9 +151,8 @@ $(() => {
         <li class="repo">
           <a class="name" href="javascript:void(0)">${repository.name}</a>
           <p class="description">${repository.description}</p>
-          <div class="owner">
+          <div class="contributors">
             <img class="avater" src="${repository.owner.avatar_url}">
-            <span class="name">${repository.owner.login}</span>
           </div>
         </li>
       `)

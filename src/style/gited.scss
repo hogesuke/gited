@@ -93,6 +93,8 @@ body {
   list-style: none;
 
   .repo {
+    display: flex;
+    flex-direction: column;
     box-sizing: border-box;
     width: 350px;
     height: 140px;
@@ -113,17 +115,13 @@ body {
       font-size: 14px;
     }
 
-    .owner {
-      .avater {
-        width: 20px;
-        height: 20px;
-      }
+    .contributors {
+      margin-top: auto;
 
-      .name {
-        display: inline-block;
-        font-size: 14px;
-        line-height: 20px;
-        color: #aaa;
+      .avater {
+        width: 24px;
+        height: 24px;
+        border-radius: 50%;
       }
     }
   }
