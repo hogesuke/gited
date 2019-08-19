@@ -74,6 +74,7 @@ class Scroller {
           $('#repositories').fadeIn(1500)
           $('#login-form').fadeIn(1500)
           $('#description').fadeIn(1500)
+          $('body').removeClass('dark')
           $stopButton.addClass('inactive')
           clearInterval(endJudgeIntervalId)
           // TODO: YouTubeプレイヤーを復活させる場合は、もとに戻す
@@ -130,6 +131,7 @@ class Scroller {
       $('#repositories').fadeIn(1500)
       $('#login-form').fadeIn(1500)
       $('#description').fadeIn(1500)
+      $('body').removeClass('dark')
     })
     // TODO: YouTubeプレイヤーを復活させる場合は、もとに戻す
     // stopPlayer()
@@ -165,6 +167,7 @@ $(() => {
     $('#repositories').fadeOut(2000)
     $('#login-form').fadeOut(2000)
     $('#description').fadeOut(2000)
+    $('body').addClass('dark')
 
     const repoName = $(this).text()
     loader.loadCommits(repoName).then(commits => {
