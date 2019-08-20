@@ -82,8 +82,8 @@ exports.commits = function (req, res) {
         page: pageNo
       }, function (err, result) {
         if (err) {
-          console.dir(err)
           next(err)
+          return
         }
 
         for (var i = 0; i < result.length; i++) {

@@ -169,7 +169,8 @@ $(() => {
     $('#description').fadeOut(2000)
     $('body').addClass('dark')
 
-    const repoName = $(this).text()
+    const repoName = $(this).find('.name').text()
+    console.log('repoName', repoName)
     loader.loadCommits(repoName).then(commits => {
       scroller.setRepoName(repoName)
       scroller.setCommits(commits)
