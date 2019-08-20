@@ -151,7 +151,7 @@ $(() => {
     $.each(repos, (i, repository) => {
       const $repository = $(`
         <li class="repo">
-          <a class="name" href="javascript:void(0)">${repository.name}</a>
+          <span class="name">${repository.name}</span>
           <p class="description">${repository.description}</p>
           <div class="contributors">
             <img class="avater" src="${repository.owner.avatar_url}">
@@ -162,7 +162,7 @@ $(() => {
     })
   })
 
-  $('#repositories').on('click', '.repo a', function () {
+  $('#repositories').on('click', '.repo', function () {
     $('#user-info').fadeOut(2000)
     $('#repositories').fadeOut(2000)
     $('#login-form').fadeOut(2000)

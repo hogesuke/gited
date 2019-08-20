@@ -5,12 +5,12 @@
 }
 
 body {
-  overflow: hidden;
   background-color: #fff;
   color: #333;
   transition: background-color 1.5s;
 
   &.dark {
+    overflow: hidden;
     background-color: #000;
   }
 }
@@ -109,11 +109,6 @@ body {
     background: #fff;
     transition: box-shadow 0.15s;
 
-    &:hover {
-      box-shadow: 0 0 12px 1px #c9cdd6;
-      cursor: pointer;
-    }
-
     .name {
       color: #333;
       text-decoration: none;
@@ -123,7 +118,7 @@ body {
     }
 
     .description {
-      margin: 4px 0;
+      margin: 8px 0;
       color: #757575;
       font-size: 14px;
     }
@@ -135,6 +130,15 @@ body {
         width: 24px;
         height: 24px;
         border-radius: 50%;
+      }
+    }
+
+    &:hover {
+      box-shadow: 0 0 12px 1px #c9cdd6;
+      cursor: pointer;
+
+      .name {
+        text-decoration: underline;
       }
     }
   }
