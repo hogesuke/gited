@@ -5,9 +5,14 @@
 }
 
 body {
-  overflow: hidden;
-  background-color: #000;
-  color: #fff;
+  background-color: #fff;
+  color: #333;
+  transition: background-color 1.5s;
+
+  &.dark {
+    overflow: hidden;
+    background-color: #000;
+  }
 }
 
 #social-button-container {
@@ -52,12 +57,6 @@ body {
   }
 }
 
-#repositories {
-  a {
-    color: #fff;
-  }
-}
-
 #screen {
   height: 100%;
   width: 100%;
@@ -70,6 +69,7 @@ body {
     padding: 5px 0;
     text-align: center;
     font-size: 18px;
+    color: #fff;
   }
 }
 
@@ -89,5 +89,57 @@ body {
 
   &.inactive {
     display: none;
+  }
+}
+
+.repo-list {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  list-style: none;
+
+  .repo {
+    display: flex;
+    flex-direction: column;
+    box-sizing: border-box;
+    width: 350px;
+    height: 140px;
+    margin: 10px;
+    padding: 15px;
+    background: #fff;
+    transition: box-shadow 0.15s;
+
+    .name {
+      color: #333;
+      text-decoration: none;
+      font-size: 18px;
+      font-weight: 700;
+      font-family: Helvetica, Arial, freesans, sans-serif;
+    }
+
+    .description {
+      margin: 8px 0;
+      color: #757575;
+      font-size: 14px;
+    }
+
+    .contributors {
+      margin-top: auto;
+
+      .avater {
+        width: 24px;
+        height: 24px;
+        border-radius: 50%;
+      }
+    }
+
+    &:hover {
+      box-shadow: 0 0 12px 1px #c9cdd6;
+      cursor: pointer;
+
+      .name {
+        text-decoration: underline;
+      }
+    }
   }
 }

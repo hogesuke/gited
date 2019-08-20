@@ -74,6 +74,7 @@ class Scroller {
           $('#repositories').fadeIn(1500)
           $('#login-form').fadeIn(1500)
           $('#description').fadeIn(1500)
+          $('body').removeClass('dark')
           $stopButton.addClass('inactive')
           clearInterval(endJudgeIntervalId)
           // TODO: YouTubeプレイヤーを復活させる場合は、もとに戻す
@@ -130,6 +131,7 @@ class Scroller {
       $('#repositories').fadeIn(1500)
       $('#login-form').fadeIn(1500)
       $('#description').fadeIn(1500)
+      $('body').removeClass('dark')
     })
     // TODO: YouTubeプレイヤーを復活させる場合は、もとに戻す
     // stopPlayer()
@@ -147,16 +149,25 @@ $(() => {
   loader.loadRepos().then(repos => {
     const $repositories = $('#repositories ul')
     $.each(repos, (i, repository) => {
-      const $repository = $('<li class="repo"><a href="javascript:void(0)">' + repository.name + '</a></li>')
+      const $repository = $(`
+        <li class="repo">
+          <span class="name">${repository.name}</span>
+          <p class="description">${repository.description}</p>
+          <div class="contributors">
+            <img class="avater" src="${repository.owner.avatar_url}">
+          </div>
+        </li>
+      `)
       $repositories.append($repository)
     })
   })
 
-  $('#repositories').on('click', '.repo a', function () {
+  $('#repositories').on('click', '.repo', function () {
     $('#user-info').fadeOut(2000)
     $('#repositories').fadeOut(2000)
     $('#login-form').fadeOut(2000)
     $('#description').fadeOut(2000)
+    $('body').addClass('dark')
 
     const repoName = $(this).text()
     loader.loadCommits(repoName).then(commits => {
