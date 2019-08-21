@@ -1,13 +1,11 @@
-'use strict'
+const express = require('express')
+const http = require('http')
+const path = require('path')
+const passport = require('passport')
+const routes = require('./routes')
+const login = require('./routes/login')
 
-var express = require('express')
-var http = require('http')
-var path = require('path')
-var passport = require('passport')
-var routes = require('./routes')
-var login = require('./routes/login')
-
-var app = express()
+const app = express()
 
 // all environments
 app.set('port', process.env.PORT || 3001)
@@ -22,11 +20,11 @@ app.use(express.cookieParser())
 app.use(express.session({ secret: 'testtesttest' }))
 app.use(passport.initialize())
 app.use(passport.session())
-app.use(app.router)
+// app.use(app.router)
 app.use(express.static(path.join(__dirname, 'www')))
 
 // development only
-if (app.get('env') == 'development') {
+if (app.get('env') === 'development') {
   app.use(express.errorHandler())
 }
 
@@ -36,13 +34,13 @@ app.get('/repos', login.checkLogin, routes.repos)
 app.post('/login/github', passport.authenticate('github'))
 app.get('/login/github/callback',
   passport.authenticate('github', { failureRedirect: '/fail' }),
-  function (req, res) {
-    var loginUser = req.session.passport.user
+  (req, res) => {
+    const loginUser = req.session.passport.user
     res.redirect('/')
   }
 )
 app.post('/logout', login.logout)
 
-http.createServer(app).listen(app.get('port'), function () {
+http.createServer(app).listen(app.get('port'), () => {
   console.log('Express server listening on port ' + app.get('port'))
 })
