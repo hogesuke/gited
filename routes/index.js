@@ -1,40 +1,37 @@
-'use strict'
+const async = require('async')
+const GitHubApi = require('node-github')
 
-var async = require('async')
-var GitHubApi = require('node-github')
-var request = require('request')
-
-exports.index = function (req, res) {
-  var loginUser = req.session.passport.user
+exports.index = (req, res) => {
+  const loginUser = req.session.passport.user
   res.render('index', {
     name: loginUser.raw_name,
     userType: loginUser.type
   })
 }
 
-exports.repos = function (req, res) {
-  var loginUser = req.session.passport.user
-  var perPage = 100
-  var github = new GitHubApi({
+exports.repos = (req, res) => {
+  const loginUser = req.session.passport.user
+  const perPage = 100
+  const github = new GitHubApi({
     version: '3.0.0',
     timeout: 5000
   })
 
-  var getReposRequester = function (pageNo, repos) {
-    var func = function (next) {
+  const getReposRequester = (pageNo, repos) => {
+    const func = next => {
       github.repos.getAll({
         type: 'all',
         sort: 'updated',
         direction: 'desc',
         per_page: perPage,
         page: pageNo
-      }, function (err, result) {
+      }, (err, result) => {
         if (err) {
           console.dir(err)
           next(err)
         }
 
-        for (var i = 0; i < result.length; i++) {
+        for (let i = 0; i < result.length; i++) {
           repos.push(result[i])
         }
 
@@ -55,7 +52,7 @@ exports.repos = function (req, res) {
     token: loginUser.token
   })
 
-  async.series([getReposRequester(0, [])], function (err, repos) {
+  async.series([getReposRequester(0, [])], (err, repos) => {
     if (!repos) {
       res.send('error occurred.')
       return
@@ -64,31 +61,31 @@ exports.repos = function (req, res) {
   })
 }
 
-exports.commits = function (req, res) {
-  var loginUser = req.session.passport.user
-  var repositoryName = req.query.name
-  var perPage = 100
-  var github = new GitHubApi({
+exports.commits = (req, res) => {
+  const loginUser = req.session.passport.user
+  const repositoryName = req.query.name
+  const perPage = 100
+  const github = new GitHubApi({
     version: '3.0.0',
     timeout: 5000
   })
 
-  var getCommitsRequester = function (pageNo, commits) {
-    var func = function (next) {
+  const getCommitsRequester = (pageNo, commits) => {
+    const func = next => {
       github.repos.getCommits({
         user: loginUser.raw_name,
         repo: repositoryName,
         per_page: perPage,
         page: pageNo
-      }, function (err, result) {
+      }, (err, result) => {
         if (err) {
           next(err)
           return
         }
 
-        for (var i = 0; i < result.length; i++) {
-          var commit = result[i].commit
-          var committer = result[i].committer
+        for (let i = 0; i < result.length; i++) {
+          const commit = result[i].commit
+          const committer = result[i].committer
           commit.committer.id = committer.id
           commit.committer.raw_name = committer.login
           commits.push(commit)
@@ -111,7 +108,7 @@ exports.commits = function (req, res) {
     token: loginUser.token
   })
 
-  async.series([getCommitsRequester(0, [])], function (err, commits) {
+  async.series([getCommitsRequester(0, [])], (err, commits) => {
     if (!commits) {
       res.send('error occurred.')
       return
