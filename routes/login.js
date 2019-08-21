@@ -1,13 +1,11 @@
-'use strict'
-
-var passport = require('passport')
-var GithubStrategy = require('passport-github').Strategy
-var LoginConfigration = require('../config/login-configuration')
+const passport = require('passport')
+const GithubStrategy = require('passport-github').Strategy
+const LoginConfigration = require('../config/login-configuration')
 
 /**
  * Github OAuth.
  */
-var githubStrategy = new GithubStrategy({
+const githubStrategy = new GithubStrategy({
   clientID: LoginConfigration.Github.clientID,
   clientSecret: LoginConfigration.Github.clientSecret,
   callbackURL: LoginConfigration.Github.callbackURL
@@ -18,7 +16,7 @@ passport.use(githubStrategy)
  * OAuth login.
  */
 function login (token, tokenSecret, profile, done) {
-  var user = {
+  const user = {
     raw_name: profile.username,
     token: token,
     type: 'loginUser'
@@ -27,22 +25,22 @@ function login (token, tokenSecret, profile, done) {
   done(null, user)
 }
 
-passport.serializeUser(function (user, done) {
+passport.serializeUser((user, done) => {
   done(null, user)
 })
 
-passport.deserializeUser(function (user, done) {
+passport.deserializeUser((user, done) => {
   done(null, user)
 })
 
 /**
  * ログインチェック。
  */
-exports.checkLogin = function (req, res, next) {
+exports.checkLogin = (req, res, next) => {
   if (req.session.passport.user) {
     next()
   } else {
-    var user = {
+    const user = {
       raw_name: LoginConfigration.tryUser.raw_name,
       token: LoginConfigration.tryUser.token,
       type: 'tryUser'
@@ -55,7 +53,7 @@ exports.checkLogin = function (req, res, next) {
 /**
  * ログアウトする。
  */
-exports.logout = function (req, res) {
+exports.logout = (req, res) => {
   req.logout()
   res.redirect('/')
 }
