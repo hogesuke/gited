@@ -21,13 +21,17 @@
     "cookie-parser": "^1.4.4",
     "core-js": "^3.2.0",
     "ejs": "*",
+    "errorhandler": "^1.5.1",
     "express": "^4.17.1",
     "express-session": "^1.16.2",
+    "method-override": "^3.0.0",
+    "morgan": "^1.9.1",
     "node-github": "0.0.3",
     "passport": "~0.2.0",
     "passport-github": "~0.1.5",
     "request": "~2.34.0",
-    "serve-favicon": "^2.5.0"
+    "serve-favicon": "^2.5.0",
+    "serve-static": "^1.14.1"
   },
   "engines": {
     "ejs": "*"
