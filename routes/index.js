@@ -2,7 +2,7 @@ const async = require('async')
 const GitHubApi = require('node-github')
 
 exports.index = (req, res) => {
-  const loginUser = req.session.passport.user
+  const loginUser = req.user
   res.render('index', {
     name: loginUser.raw_name,
     userType: loginUser.type
@@ -10,7 +10,7 @@ exports.index = (req, res) => {
 }
 
 exports.repos = (req, res) => {
-  const loginUser = req.session.passport.user
+  const loginUser = req.user
   const perPage = 100
   const github = new GitHubApi({
     version: '3.0.0',
@@ -62,7 +62,7 @@ exports.repos = (req, res) => {
 }
 
 exports.commits = (req, res) => {
-  const loginUser = req.session.passport.user
+  const loginUser = req.user
   const repositoryName = req.query.name
   const perPage = 100
   const github = new GitHubApi({
