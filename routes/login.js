@@ -37,7 +37,8 @@ passport.deserializeUser((user, done) => {
  * ログインチェック。
  */
 exports.checkLogin = (req, res, next) => {
-  if (req.session.passport.user) {
+  console.log('req.session', req.session)
+  if (req.user) {
     next()
   } else {
     const user = {
@@ -45,7 +46,7 @@ exports.checkLogin = (req, res, next) => {
       token: LoginConfigration.tryUser.token,
       type: 'tryUser'
     }
-    req.session.passport.user = user
+    req.user = user
     next()
   }
 }

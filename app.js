@@ -21,6 +21,7 @@ app.set('view engine', 'ejs')
 app.use(express.json())
 app.use(express.urlencoded())
 app.use(passport.initialize())
+app.use(passport.session())
 app.use(logger('dev'))
 app.use(methodOverride())
 app.use(serveStatic(path.join(__dirname, 'www')))
@@ -40,7 +41,6 @@ app.post('/login/github', passport.authenticate('github'))
 app.get('/login/github/callback',
   passport.authenticate('github', { failureRedirect: '/fail' }),
   (req, res) => {
-    const loginUser = req.session.passport.user
     res.redirect('/')
   }
 )
