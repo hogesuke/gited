@@ -5,7 +5,7 @@
 }
 
 body {
-  background-color: #fff;
+  background-color: #f0f0f0;
   color: #333;
   transition: background-color 1.5s;
 
@@ -104,10 +104,10 @@ body {
     box-sizing: border-box;
     width: 350px;
     height: 140px;
-    margin: 10px;
-    padding: 15px;
+    margin: 15px;
+    padding: 20px;
     background: #fff;
-    transition: box-shadow 0.15s;
+    transition: box-shadow 0.4s;
 
     .name {
       color: #333;
@@ -134,7 +134,7 @@ body {
     }
 
     &:hover {
-      box-shadow: 0 0 12px 1px #c9cdd6;
+      box-shadow: 0 0 15px 0 rgba(0, 0, 0, 0.15);
       cursor: pointer;
 
       .name {
