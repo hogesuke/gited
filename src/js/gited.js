@@ -1,3 +1,4 @@
+import 'ress'
 import '@/style/gited.scss'
 import superagent from 'superagent'
 
