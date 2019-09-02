@@ -1,6 +1,7 @@
 <html>
 <head>
 <link rel='stylesheet' href='/style/gited.css' />
+<link rel="stylesheet" href="/icomoon/style.css">
 <script type="text/javascript" src="/js/jquery.min.js"></script>
 <script type="text/javascript" src="/js/jquery.socialbutton-1.9.1.min.js"></script>
 <script type="text/javascript" src="/js/gited.js"></script>
@@ -20,35 +21,35 @@
 </script>
 </head>
 <body>
-<div id="social-button-container">
-  <div class="hatena"></div>
-  <div class="facebook"></div>
-  <div class="twitter"></div>
-</div>
 <div id="description">
-  <div id="main-title">Git Ending</div>
-  <div id="catch-copy">GitHubのコミットログでエンディングロール</div>
-  <div id="guide">エンディングを流したいリポジトリをクリック</div>
+  <div id="main-title">GIT END ROLL</div>
+  <div id="catch-copy">Create an end role with commit logs</div>
+  <div id="social-container">
+    <button class="social-button"><i class="icon-twitter"></i></button>
+    <button class="social-button"><i class="icon-facebook"></i></button>
+    <button class="social-button"><i class="icon-hatebu"></i></button>
+  </div>
 </div>
-<% if (userType === 'tryUser') { %>
-  <form id="login-form" action="/login/github" method="post">
-    <input type="submit" id="login-button" value="GitHub LOGIN"/>
-  </form>
-<% } else { %>
-  <form id="login-form" action="/logout" method="post">
-    <input type="submit" id="logout-button" value="GitHub LOGOUT"/>
-  </form>
-<% } %>
-<div id="user-info">
+<section id="repositories">
   <% if (userType === 'tryUser') { %>
-  <div id="user-type">※現在はお試し用ユーザーを表示しています。</div>
+    <form id="login-form" action="/login/github" method="post">
+      <input type="submit" id="login-button" value="GitHub LOGIN"/>
+    </form>
+  <% } else { %>
+    <form id="login-form" action="/logout" method="post">
+      <input type="submit" id="logout-button" value="GitHub LOGOUT"/>
+    </form>
   <% } %>
-  <div id="user-name">■ユーザー： <%= name %></div>
-</div>
-<div id="repositories">
+  <div id="user-info">
+    <% if (userType === 'tryUser') { %>
+    <div id="user-type">※現在はお試し用ユーザーを表示しています。</div>
+    <% } %>
+    <div id="user-name">■ユーザー： <%= name %></div>
+  </div>
+  <h1>Repositories</h1>
   <ul class="repo-list">
   </ul>
-</div>
+</section>
 <div id="screen"></div>
 <div id="stop-button" class="inactive">終劇</div>
 </body>

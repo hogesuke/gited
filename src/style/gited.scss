@@ -5,7 +5,8 @@
 }
 
 body {
-  background-color: #f0f0f0;
+  margin: 0;
+  background: #fff;
   color: #333;
   transition: background-color 1.5s;
 
@@ -15,11 +16,18 @@ body {
   }
 }
 
-#social-button-container {
+#social-container {
   overflow: hidden;
 
-  div {
-    float: left;
+  .social-button {
+    width: 60px;
+    height: 60px;
+    margin: 10px;
+    border: solid 3px #fff;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.2);
+    font-size: 26px;
+    color: #fff;
   }
 }
 
@@ -30,11 +38,17 @@ body {
 }
 
 #description {
+  padding: 220px 0;
+  background-image: linear-gradient(rgba(0, 0, 0, 0.65), rgba(0, 0, 0, 0.65)), url('/img/hero001.jpg');
+  background-size: cover;
+  background-position: left 50% top 35%;
   text-align: center;
+  color: #fff;
 
   #main-title {
     margin: 10px 0;
     font-size: 70px;
+    font-weight: bold;
   }
 
   #catch-copy {
@@ -92,6 +106,29 @@ body {
   }
 }
 
+#repositories {
+  padding: 30px 0;
+  background: rgba(0, 0, 40, 0.03);
+
+  h1 {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    margin: 30px 0;
+    font-size: 24px;
+    text-align: center;
+    color: #585858;
+
+    &::after {
+      content: '';
+      display: block;
+      width: 80px;
+      margin: 25px auto;
+      border-top: solid 3px #585858;
+    }
+  }
+}
+
 .repo-list {
   display: flex;
   flex-wrap: wrap;
@@ -107,7 +144,8 @@ body {
     margin: 15px;
     padding: 20px;
     background: #fff;
-    transition: box-shadow 0.4s;
+    border-radius: 4px;
+    transition: box-shadow 0.2s ease;
 
     .name {
       color: #333;
@@ -134,7 +172,7 @@ body {
     }
 
     &:hover {
-      box-shadow: 0 0 15px 0 rgba(0, 0, 0, 0.15);
+      box-shadow: 0 0 20px 0 rgba(0, 0, 0, 0.15);
       cursor: pointer;
 
       .name {
