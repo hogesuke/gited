@@ -144,7 +144,8 @@ body {
     margin: 15px;
     padding: 20px;
     background: #fff;
-    transition: box-shadow 0.4s ease-in-out;
+    border-radius: 4px;
+    transition: box-shadow 0.2s ease;
 
     .name {
       color: #333;
@@ -171,7 +172,7 @@ body {
     }
 
     &:hover {
-      box-shadow: 0 0 15px 0 rgba(0, 0, 0, 0.15);
+      box-shadow: 0 0 20px 0 rgba(0, 0, 0, 0.15);
       cursor: pointer;
 
       .name {
